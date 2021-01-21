@@ -1,0 +1,66 @@
+body {
+   color: var(--light-1);
+   font-weight: 700 !important ;
+   font-family: "Proxima Nova Alt", sans-serif !important;
+   background-color: var(--dark-1);
+}
+
+label {
+   line-height: 39px;
+   min-width: 170px;
+   text-align: right;
+   font-size: 20px;
+   font-weight: bold;
+}
+input,
+textarea {
+   font-size: 20px;
+   font-weight: 300;
+   border-radius: 3px;
+   padding: 0.3rem 1rem;
+   color: var(--light-1);
+   background-color: var(--dark-3);
+   &:focus {
+      outline: none;
+   }
+}
+
+input {
+   max-height: 39px;
+}
+
+small {
+   font-size: 17px;
+   font-weight: 300;
+}
+
+svg {
+   cursor: pointer;
+}
+
+.h-100vh {
+   height: 100vh;
+}
+
+.yellow {
+   color: var(--yellow-1);
+}
+
+.font-light {
+   font-weight: 300;
+}
+
+.v-toast {
+   &__item {
+      position: relative;
+      padding-right: 24px;
+   }
+   &__icon {
+      top: 8px;
+      right: 8px;
+      margin-left: 0;
+      position: absolute;
+      @include size(16px);
+      min-width: 16px !important;
+   }
+}
