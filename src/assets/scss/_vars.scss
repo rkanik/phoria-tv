@@ -12,4 +12,33 @@
 
    --yellow-1: #ffcf00;
    --yellow-2: #e4be31;
+   --yellow-3: #e8a90c;
+}
+
+.bg-primary {
+   background-color: var(--dark-1);
+}
+.bg-secondary {
+   background-color: var(--dark-2);
+}
+.bg-secondary2 {
+   background-color: var(--dark-3);
+}
+.text-primary {
+   color: var(--yellow-1);
+}
+.text-cyan-accent {
+   color: var(--cyan-1);
+}
+.text-cyan-accent2 {
+   color: var(--cyan-2);
+}
+.bg-yellow-accent {
+   background-color: var(--yellow-1);
+}
+.bg-yellow-accent2 {
+   background-color: var(--yellow-2);
+}
+.bg-yellow-accent3 {
+   background-color: var(--yellow-3);
 }

@@ -1,10 +1,9 @@
 <template>
-	<div class="container">
-		<div class="row">
-			<div :class="colClasses">
-				<slot></slot>
-			</div>
-		</div>
+	<div v-if="v2" class="containerv2 mx-auto">
+		<slot />
+	</div>
+	<div v-else class="container mx-auto">
+		<slot />
 	</div>
 </template>
 
@@ -12,23 +11,18 @@
 export default {
 	name: 'Container',
 	props: {
-		lg: {
-			type: [String, Boolean],
-			default: false
-		},
-		mxAuto: {
+		v2: {
 			type: Boolean,
 			default: false
-		}
-	},
-	computed: {
-		colClasses() {
-			return {
-				['col']: true,
-				[`col-lg-${this.lg}`]: this.lg,
-				['mx-auto']: this.mxAuto
-			}
 		}
 	}
 }
 </script>
+<style lang="scss">
+	.containerv2 {
+		max-width: 95%;
+		@include on("2xl") {
+			max-width: 1371px;
+		}
+	}
+</style>

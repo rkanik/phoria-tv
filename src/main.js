@@ -9,7 +9,7 @@ import VueToast from 'vue-toast-notification';
 import './registerServiceWorker'
 
 // Styles
-import 'bootstrap/dist/css/bootstrap.min.css'
+import './assets/css/tailwind.css'
 import 'vue-toast-notification/dist/theme-sugar.css';
 import './assets/scss/main.scss'
 

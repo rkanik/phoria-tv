@@ -2,8 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 // Layouts
-import AuthLayout from '../layouts/AuthLayout'
-import HomeLayout from '../layouts/HomeLayout'
+import DefaultLayout from '../layouts/DefaultLayout'
 
 // Importer
 const _import = name => () => import(`../views/${name}.vue`)
@@ -16,9 +15,18 @@ const router = new VueRouter({
    routes: [
       {
          path: '/',
-         component: AuthLayout,
-         redirect: '/login',
+         component: DefaultLayout,
          children: [
+            {
+               name: 'Landing',
+               path: '',
+               component: _import('LandingPage')
+            },
+            {
+               path: '/home',
+               name: 'Home',
+               component: _import('Home')
+            },
             {
                name: 'Login',
                path: 'login',
@@ -33,17 +41,6 @@ const router = new VueRouter({
                name: 'Profile',
                path: ':username',
                component: _import('Profile')
-            }
-         ]
-      },
-      {
-         path: '/home',
-         component: HomeLayout,
-         children: [
-            {
-               name: 'Home',
-               path: 'home',
-               component: _import('Home')
             }
          ]
       }
