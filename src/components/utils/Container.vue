@@ -2,7 +2,7 @@
 	<div v-if="v2" class="containerv2 mx-auto">
 		<slot />
 	</div>
-	<div v-else class="container mx-auto">
+	<div v-else class="container py-2 sm:py-0 mx-auto">
 		<slot />
 	</div>
 </template>
@@ -22,7 +22,7 @@ export default {
 	.containerv2 {
 		max-width: 95%;
 		@include on("2xl") {
-			max-width: 1371px;
+			max-width: 1200px;
 		}
 	}
 </style>

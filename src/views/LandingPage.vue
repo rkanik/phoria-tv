@@ -15,29 +15,31 @@
 				<div
 					class="hero__content absolute inset-0 flex items-center justify-center"
 				>
-					<h1 class="text-7xl font-bold text-white text-center">
+					<h1
+						class="text-3xl 2xl:text-7xl font-bold text-white text-center"
+					>
 						WELCOME <br />
 						TO PHORIATV
 					</h1>
 				</div>
 			</div>
 		</div>
-		<div class="services pt-8">
+		<div class="services">
 			<div class="services__inner">
 				<div class="container mx-auto">
-					<div class="grid grid-cols-1 lg:grid-cols-3">
-						<div class="service p-8 text-center">
-							<h4 class="text-primary text-2xl font-bold mb-8">
+					<div class="grid grid-cols-1 lg:grid-cols-3 bg-secondary">
+						<div class="service p-2 2xl:p-8 text-center mb-2 2xl:mb-0">
+							<h4 class="text-primary text-xl 2xl:text-2xl font-bold mb-4 2xl:mb-8">
 								A Place For All Your Exclusive Content
 							</h4>
-							<p class="block text-2xl font-light text-white mt-9">
+							<p class="block text-base 2xl:text-2xl font-light text-white 2xl:mt-9">
 								Phoria hosts your images / videos private DMs. Only
 								accessible after you get paid what you've want from your
 								subscribers.
 							</p>
 						</div>
-						<div class="service p-8 text-center">
-							<h4 class="text-primary text-2xl font-bold mb-8">
+						<div class="service p-2 2xl:p-8 text-center mb-2 2xl:mb-0">
+							<h4 class="text-primary text-xl 2xl:text-2xl font-bold mb-4 2xl:mb-8">
 								Subscription Platform With Zero Fees
 							</h4>
 							<div class="flex items-center justify-center">
@@ -45,16 +47,16 @@
 								<IconLongArrowRight class="h-4 mx-8" />
 								<IconOpenPerson class="h-7" />
 							</div>
-							<p class="text-2xl font-light text-white mt-9">
+							<p class="block text-base 2xl:text-2xl font-light text-white 2xl:mt-9">
 								We believe creators should earn more, and not feel
 								cheated for their hard work.
 							</p>
 						</div>
-						<div class="service p-8 text-center">
-							<h4 class="text-primary text-2xl font-bold mb-8">
+						<div class="service p-2 2xl:p-8 text-center">
+							<h4 class="text-primary text-xl 2xl:text-2xl font-bold mb-4 2xl:mb-8">
 								A Place For All Your Exclusive Content
 							</h4>
-							<p class="block text-2xl font-light text-white mt-9">
+							<p class="block text-base 2xl:text-2xl font-light text-white 2xl:mt-9">
 								Phoria hosts your images / videos private DMs. Only
 								accessible after you get paid what you've want from your
 								subscribers.
@@ -63,13 +65,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="text-center text-2xl text-white font-bold py-3">
+			<div class="text-center text-base 2xl:text-2xl text-white font-bold py-3">
 				Interested in using our platform?
 			</div>
 		</div>
 		<div class="subscribe bg-primary p-7 text-center text-white">
 			<div class="container mx-auto">
-				<h3 class="subscribe__title text-2xl text-white mx-auto">
+				<h3 class="subscribe__title text-base 2xl:text-2xl text-white mx-auto">
 					<router-link to="/signup" class="text-primary font-bold"
 						>Sign up</router-link
 					>
@@ -114,7 +116,6 @@
 				</form>
 			</div>
 		</div>
-		<div class="pb-12 bg-secondary"></div>
 	</div>
 </template>
 
@@ -142,11 +143,17 @@ export default {
 <style lang='scss' scoped>
 	.hero {
 		&__img {
-			min-height: 414px;
+			min-height: 100px;
+			@include on("2xl") {
+				min-height: 512px;
+			}
 		}
 		&__img2 {
-			max-height: 681px;
-			transform: translateY(-50%);
+			max-height: 150px;
+         transform: translateY(-50%);
+         @include on("2xl") {
+            max-height: 681px;
+			}
 		}
 		&__content {
 			background-color: rgba(#161616, 0.9);

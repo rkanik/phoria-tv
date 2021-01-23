@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store'
 
 // Layouts
 import DefaultLayout from '../layouts/DefaultLayout'
@@ -23,11 +24,6 @@ const router = new VueRouter({
                component: _import('LandingPage')
             },
             {
-               path: '/home',
-               name: 'Home',
-               component: _import('Home')
-            },
-            {
                name: 'Login',
                path: 'login',
                component: _import('Login')
@@ -38,13 +34,47 @@ const router = new VueRouter({
                component: _import('Signup')
             },
             {
+               path: '/home',
+               component: _import('Home'),
+               children: [
+                  {
+                     path: '',
+                     name: 'Feed',
+                     component: _import('Home/Feed')
+                  },
+                  {
+                     path: 'videos',
+                     name: 'Videos',
+                     component: _import('Home/Videos')
+                  }
+               ]
+            },
+            {
+
+               path: '/:username',
                name: 'Profile',
-               path: ':username',
-               component: _import('Profile')
-            }
+               component: _import('User/Profile')
+
+            },
+            {
+               path: 'user/settings',
+               name: 'UserSettings',
+               component: _import('User/Settings')
+            },
+            {
+               path: 'direct/inbox',
+               name: 'Inbox',
+               component: _import('Inbox')
+            },
          ]
       }
    ]
+})
+
+router.beforeEach((to, _, next) => {
+   let isAuth = store.getters['Auth/isAuth']
+   if (to.path === '/login' && isAuth) return next('/home')
+   next()
 })
 
 export default router

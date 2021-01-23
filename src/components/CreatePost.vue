@@ -29,18 +29,14 @@
 					@click="post.images.splice(mi, 1)"
 				>
 					<img
-						class="w-full h-full rounded-xl object-cover object-contain"
+						class="w-full h-full rounded-xl object-cover object-center"
 						alt="Create post image"
-						:src="img.base"
+						:src="img"
 					/>
 					<div
 						class="absolute cursor-pointer -top-2 -right-2 h-5 w-5 rounded-full bg-red-400 flex items-center justify-center"
 					>
-						<Icon
-							name="close"
-							class="h-4 w-4"
-							stroke-width="2"
-						>
+						<Icon name="close" class="h-4 w-4">
 							<IconClose />
 						</Icon>
 					</div>
@@ -61,7 +57,12 @@
 				</TButton>
 			</Flex>
 			<div class="py-3">
-				<TButton color="primary" size="sm" :disabled="!validPost"
+				<TButton
+					size="sm"
+					color="primary"
+               v-if="validPost"
+					:disabled="!validPost"
+					@click="$emit('create', post)"
 					>Publish Post</TButton
 				>
 			</div>
@@ -91,6 +92,11 @@ export default {
 		return {
 			post: {
 				text: '',
+				user: {
+					fullName: 'RK Anik',
+					username: '@rkanik',
+					thumbnail: require('@/assets/images/profile-thumb.png'),
+				},
 				images: []
 			}
 		}
@@ -111,10 +117,7 @@ export default {
 					if (!this.post.images.some(img => img.file.name === file.name)) {
 						let reader = new FileReader();
 						reader.addEventListener("load", () => {
-							this.post.images.push({
-								file,
-								base: reader.result
-							})
+							this.post.images.push(reader.result)
 						}, false);
 						reader.readAsDataURL(file);
 					}

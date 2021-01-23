@@ -1,175 +1,170 @@
 <template>
-	<div class="signup">
-		<div class="row">
-			<div class="col col-lg-3 text-center">
-				<img
-					class="signup__avatar mb-2"
-					:src="
-						user.avatar ||
-						require('../assets/images/Phoria-Logo_YBBG.png')
-					"
-					alt="Registration Avatar"
-				/>
-				<Button text @click="onClickUpload">
-					<input
-						type="file"
-						ref="avatarInput"
-						name="avatarInput"
-						style="display: none"
-						accept="image/x-png,image/gif,image/jpeg"
-						@input="onInputAvatar"
+	<AuthLayout>
+		<div class="signup">
+			<Flex class="flex-col md:flex-row">
+				<div class="w-44 mx-auto md:mr-16 mb-6 md:mb-0 md:mx-0">
+					<img
+						class="rounded-xl mb-2 object-cover object-center w-44 h-44"
+						:src="
+							userAvatar ||
+							require('@/assets/images/Phoria-Logo_YBBG.png')
+						"
+						alt="Registration Avatar"
 					/>
-					<UploadIcon class="mb-2" />
-					Upload Avatar
-				</Button>
-			</div>
-			<div class="col">
-				<form @submit.prevent="onSubmit" novalidate>
-					<div class="d-flex mb-4">
-						<label for="username" class="mr-4 mb-0">Username</label>
-						<div class="w-100">
-							<input
-								type="text"
-								class="w-100"
-								id="username"
-								placeholder="JohnnyBravo"
-								v-model="user.username"
-							/>
-							<small class="text-center d-block mt-1"
-								>This will be displayed as
-								<span class="yellow"
-									>https://phoria.tv/{{
-										user.username !== ""
-											? user.username
-											: "johnnybravo"
-									}}</span
-								></small
-							>
-						</div>
-					</div>
-					<div class="d-flex mb-4">
-						<label for="email" class="mr-4 mb-0">Email</label>
-						<input
-							id="email"
-							type="email"
-							class="w-100"
-							placeholder="johnnybravo@gmail.com"
-							v-model="user.email"
-						/>
-					</div>
-					<div class="signup__input-group d-flex mb-4">
-						<label for="password" class="mr-4 mb-0">Password</label>
-						<input
-							id="password"
-							class="w-100"
-							v-model="user.password"
-							placeholder="***********"
-							:type="showPassword ? 'text' : 'password'"
-						/>
-						<div class="post-icon" @click="showPassword = !showPassword">
-							<EyeIcon v-if="showPassword" />
-							<EyeOffIcon v-else />
-						</div>
-					</div>
-					<div class="d-flex mb-5">
-						<label for="confirmPassword" class="mr-4 mb-0"
-							>Confirm Password</label
-						>
-						<input
-							:type="showPassword ? 'text' : 'password'"
-							class="w-100"
-							id="confirmPassword"
-							v-model="user.confirmPassword"
-							placeholder="***********"
-						/>
-					</div>
-					<div class="d-flex mb-4">
-						<label for="subscription" class="mr-4 mb-0"
-							>Set Subscription<small> (Optional)</small></label
-						>
-						<div class="w-100">
-							<input
-								type="text"
-								class="w-100"
-								id="subscription"
-								placeholder="$7.99"
-								v-model="subscription"
-							/>
-							<small class="text-center d-block mt-1"
-								>This can be updated later in Settings</small
-							>
-						</div>
-					</div>
-					<div class="d-flex mb-4">
-						<label for="bio" class="mr-4 mb-0"
-							>Bio<small> (Optional)</small></label
-						>
-						<div class="w-100">
-							<textarea
-								id="bio"
-								type="text"
-								rows="3"
-								class="w-100 mt-1"
-								placeholder="Write your bio here"
-								v-model="user.bio"
-							/>
-							<small class="text-center d-block"
-								>This can be updated later in Settings</small
-							>
-						</div>
-					</div>
-					<Button class="d-block ml-auto px-4" color="yellow"
-						>SUBMIT</Button
+					<button
+						class="font-bold flex items-center justify-center w-full"
+						@click="onClickUpload"
 					>
-				</form>
-			</div>
+						<i class="material-icons mr-2">backup</i>
+						<span class="mt-1">Upload Avatar</span>
+					</button>
+				</div>
+				<div>
+					<ValidationObserver v-slot="{ invalid, handleSubmit, reset }">
+						<form @submit.prevent="handleSubmit(() => onSubmit(reset))">
+							<template v-for="field in user">
+								<Validate
+									class="block"
+									:rules="field.rules"
+									:key="field.name"
+									v-slot="{ errors }"
+								>
+									<TInput
+										dark
+										:hint="field.hint"
+										:name="field.name"
+										:label="field.label"
+										:type="field.type"
+										:errors="
+											field.errors && field.errors.length
+												? field.errors
+												: errors
+										"
+										:textarea="field.textarea || false"
+										:class="field.class || ' mb-1 md:mb-6'"
+										v-model="field.value"
+										@change="onChangeInput"
+										inputClass="w-full md:w-96"
+									/>
+								</Validate>
+							</template>
+							<TButton
+								size="sm"
+								color="primary"
+								class="px-10 block ml-auto"
+								:disabled="invalid || cPassInvalid"
+								>Signup</TButton
+							>
+						</form>
+					</ValidationObserver>
+				</div>
+			</Flex>
 		</div>
-	</div>
+		<input
+			type="file"
+			ref="avatarInput"
+			name="avatarInput"
+			style="display: none"
+			accept="image/x-png,image/gif,image/jpeg"
+			@input="onInputAvatar"
+		/>
+	</AuthLayout>
 </template>
 
 <script>
-import UploadIcon from '../components/icons/Upload'
-import EyeIcon from '../components/icons/Eye'
-import EyeOffIcon from '../components/icons/EyeOff'
+
+import AuthLayout from '@/layouts/AuthLayout'
+
+import { miniId } from '../helpers'
+import { extend } from 'vee-validate';
+import { required, email, min, max } from 'vee-validate/dist/rules';
+import { mapActions } from 'vuex';
+
+extend('min', min);
+extend('max', max);
+extend('email', email);
+extend('required', required);
+
 export default {
 	name: 'signup',
 	components: {
-		UploadIcon,
-		EyeIcon,
-		EyeOffIcon
+		AuthLayout
 	},
 	data() {
 		return {
 			// Booleans
 			showPassword: false,
+			userAvatar: null,
 
 			// Objects
 			user: {
-				avatar: null,// require('../assets/images/Phoria-Logo_YBBG.png'),
-				username: '',
-				email: '',
-				password: '',
-				confirmPassword: '',
-				subscription: '',
-				bio: ''
+				username: {
+					value: '',
+					rules: 'required|min:3|max:16',
+					name: 'username',
+					hint: 'JohnnyBravo',
+					label: 'Username*'
+				},
+				email: {
+					value: '',
+					type: 'email',
+					name: 'email',
+					rules: 'required|email',
+					hint: 'johnnybravo@gmail.com',
+					label: 'Email*'
+				},
+				password: {
+					value: '',
+					rules: 'required|min:6|max:16',
+					type: 'password',
+					name: 'password',
+					label: 'Password*',
+					hint: '***********'
+				},
+				confirmPassword: {
+					value: '',
+					type: 'password',
+					name: 'confirmPassword',
+					label: 'Confirm Password*',
+					class: 'mb-4 md:mb-14',
+					hint: '***********',
+					errors: []
+				},
+				subscription: {
+					value: '',
+					hint: '$7.99',
+					name: 'subscription',
+					label: 'Subscription',
+					helpText: 'This can be updated later in Settings'
+				},
+				bio: {
+					value: '',
+					name: 'bio',
+					label: 'Bio',
+					textarea: true,
+					hint: 'Type your bio here',
+					helpText: 'This can be updated later in Settings'
+				}
 			}
 		}
 	},
 	computed: {
-		subscription: {
-			get() {
-				return this.user.subscription !== ''
-					? `$${this.user.subscription}`
-					: this.user.subscription
-			},
-			set(v) {
-				const value = v.replace(/\$/g, '')
-				if (!/^\d+$/.test(value)) return
-				this.user.subscription = value
-			}
+		cPassInvalid() {
+			return this.user.confirmPassword.errors.length > 0
 		}
 	},
 	methods: {
+		...mapActions('Users', ['addUser']),
+		onChangeInput({ name, value }) {
+			if (name === 'confirmPassword') {
+				if (value !== this.user.password.value) {
+					this.user.confirmPassword.errors = ['Password not matched']
+				}
+				else if (this.user.confirmPassword.errors.length) {
+					this.user.confirmPassword.errors = []
+				}
+			}
+		},
 		onClickUpload() {
 			this.$refs.avatarInput.click()
 		},
@@ -177,42 +172,36 @@ export default {
 			const file = e.target.files[0]
 			const reader = new FileReader();
 			reader.addEventListener("load", () => {
-				this.user.avatar = reader.result;
+				this.userAvatar = reader.result;
 			}, false);
 
 			if (file) {
 				reader.readAsDataURL(file);
 			}
 		},
-		onSubmit() {
-
-			const required = ['username', 'email', 'password']
-			let invalid = ''
-
-			let valid = required.every(key => {
-				if (this.user[key] === '') {
-					invalid = key
-					return false
-				}
-				return true
-			})
-
-			if (!valid) return this.$toast.open({
-				type: 'error',
-				message: `'${invalid}' is required!`
-			})
-
-			if (this.user.password !== this.user.confirmPassword) {
-				return this.$toast.open({
-					type: 'error',
-					message: `Password doesn't matched!`
-				})
+		async onSubmit(reset) {
+			const user = {
+				...Object
+					.entries(this.user)
+					.reduce((user, [key, { value }]) => (
+						{ ...user, [key]: value }
+					), {}),
+				id: miniId(),
+				avatar: this.userAvatar,
+				createdAt: Date.now()
 			}
-
-         this.$toast.clear()
-
-			console.log(this.user)
-
+			let { error, message } = await this.addUser(user)
+			this.$toast.open({
+				message,
+				type: error ? 'error' : 'success',
+			})
+			if (!error) {
+				Object.keys(this.user).forEach(field => {
+					this.user[field].value = ''
+				})
+				this.userAvatar = null
+				reset()
+			}
 		}
 	}
 }
@@ -220,27 +209,6 @@ export default {
 
 <style lang='scss' scoped>
 	.signup {
-		&__avatar {
-			height: 183px;
-			width: 183px;
-			border-radius: 22px;
-			object-fit: cover;
-			object-position: top center;
-		}
-		&__input-group {
-			position: relative;
-		}
-	}
-	label[for="subscription"] {
-		line-height: unset;
-	}
-	.post-icon {
-		position: absolute;
-		top: 50%;
-		right: 1rem;
-		transform: translate(0, -50%);
-		svg {
-			stroke: var(--light-3);
-		}
+		min-width: 822px;
 	}
 </style>

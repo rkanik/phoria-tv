@@ -14,7 +14,6 @@
    --yellow-2: #e4be31;
    --yellow-3: #e8a90c;
 }
-
 .bg-primary {
    background-color: var(--dark-1);
 }
@@ -27,11 +26,20 @@
 .text-primary {
    color: var(--yellow-1);
 }
+.text-secondary {
+   color: var(--light-2);
+}
 .text-cyan-accent {
    color: var(--cyan-1);
 }
+.bg-cyan-accent {
+   background-color: var(--cyan-1);
+}
 .text-cyan-accent2 {
    color: var(--cyan-2);
+}
+.text-yellow-accent {
+   color: var(--yellow-1);
 }
 .bg-yellow-accent {
    background-color: var(--yellow-1);
@@ -41,4 +49,10 @@
 }
 .bg-yellow-accent3 {
    background-color: var(--yellow-3);
+}
+.border-secondary {
+   border-color: var(--dark-2);
+}
+.border-secondary2 {
+   border-color: var(--dark-3);
 }

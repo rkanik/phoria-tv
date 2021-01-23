@@ -4,6 +4,7 @@
 		viewBox="0 0 24 24"
 		role="presentation"
 		:stroke="stroke"
+		:stroke-width="strokeWidth"
 		:aria-labelledby="name"
 		@click="$emit('click')"
 	>
@@ -22,6 +23,10 @@ export default {
 		stroke: {
 			type: String,
 			default: 'currentColor'
+		},
+		strokeWidth: {
+			type: [String, Number],
+			default: 2
 		}
 	}
 }

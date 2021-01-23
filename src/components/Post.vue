@@ -5,36 +5,67 @@
 		</p>
 		<Flex itemsEnd>
 			<img
-				class="w-28 h-28 rounded-xl object-cover object-contain"
-				:src="post.thumbnail"
+				class="w-28 h-28 rounded-xl object-cover object-center"
+				:src="post.user.thumbnail"
 				alt="Profile thumbnail"
 			/>
 			<div class="ml-4">
-				<h4 class="text-2xl font-bold">RK Anik</h4>
-				<p class="text-2xl font-bold text-cyan-accent">@rkanik</p>
+				<h4 class="text-2xl font-bold">{{ post.user.fullName }}</h4>
+				<p class="text-2xl font-bold text-cyan-accent">
+					{{ post.user.username }}
+				</p>
 			</div>
 		</Flex>
-		<div class="bg-secondary rounded-xl text-xl p-3 mt-5">
-			<p>
-				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-				nonumy eirmod tempor invidunt ut labore et dolore.. magna aliquyam
-				erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-				et ea rebum
-			</p>
+		<div v-if="post.text" class="bg-secondary rounded-xl text-xl p-3 mt-5">
+			<p>{{ post.text }}</p>
 		</div>
 		<div class="relative mt-5">
-			<img class="w-full rounded-xl" :src="post.image" alt="Post Image" />
+			<img
+				:src="img"
+				:key="imgi"
+				alt="Post Image"
+				class="w-full rounded-xl"
+				v-for="(img, imgi) in post.images"
+			/>
 			<Icon
-				fill="none"
-				name="Zoom"
-				stroke="currentColor"
+				name="zoom"
 				class="absolute right-4 bottom-4 cursor-pointer h-10 w-10"
-				@click="imagePreview = post.image"
+				@click="imagePreview = post.images[0]"
 			>
 				<IconZoomIn />
 			</Icon>
 		</div>
-		<ImagePreview v-model="imagePreview" :src="previewSrc" />
+		<Flex class="mt-5" justify-between items-center>
+			<TButton size="md" class="text-cyan-accent hover:text-white">
+				<Icon
+					name="bubble"
+					fill="#00B9E8"
+					stroke="none"
+					class="w-5 h-5 mr-2 hover:fill-white"
+				>
+					<IconBubble />
+				</Icon>
+				Send Tip
+			</TButton>
+			<div class="font-bold text-2xl">22 Likes</div>
+		</Flex>
+		<Comment
+			class="mt-5"
+			:user="post.user"
+			comment="Lorem ipsum dolor
+					sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+					tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+					voluptua."
+		/>
+		<Comment
+			class="mt-5"
+			:user="post.user"
+			comment="Lorem ipsum dolor
+					sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+					tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+					voluptua."
+		/>
+		<ImagePreview v-model="imagePreview" />
 	</div>
 </template>
 
@@ -42,29 +73,31 @@
 
 // Icons
 import IconZoomIn from '@/components/icons/IconZoomIn'
+import IconBubble from '@/components/icons/IconBubble'
 
 //Components
 import ImagePreview from '@/components/ImagePreview'
+import Comment from '@/components/Comment'
 
 export default {
 	name: 'Post',
 	components: {
 		IconZoomIn,
-		ImagePreview
+		IconBubble,
+		ImagePreview,
+		Comment
 	},
 	props: {
 		post: {
 			type: Object,
 			default: () => ({
-				image: require('@/assets/images/post.png'),
-				thumbnail: require('@/assets/images/profile-thumb.png'),
+				user: {}
 			})
 		}
 	},
 	data() {
 		return {
 			imagePreview: false,
-			previewSrc: false
 		}
 	}
 }

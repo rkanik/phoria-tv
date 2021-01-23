@@ -1,9 +1,11 @@
 <template>
 	<div class="default-layout">
 		<Header />
-		<main>
-			<router-view />
-		</main>
+		<perfect-scrollbar class="default-layout__ps">
+			<main>
+				<router-view />
+			</main>
+		</perfect-scrollbar>
 	</div>
 </template>
 
@@ -24,6 +26,11 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+	.default-layout {
+		&__ps {
+			height: calc(100vh - 88px);
+		}
+	}
 	.auth {
 		position: relative;
 		min-height: 100vh;
@@ -50,4 +57,3 @@ export default {
 		}
 	}
 </style>
-0

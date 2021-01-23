@@ -1,113 +1,94 @@
 <template>
 	<div class="home">
 		<div class="container mx-auto">
-			<div class="py-2 flex justify-between items-center">
-				<div class="flex items-center">
-					<img
-						class="w-16 h-16 rounded-xl object-cover object-contain"
-						src="@/assets/images/profile-thumb.png"
-						alt="Profile thumbnail"
-					/>
-					<div class="text-base lg:text-xl text-primary font-bold ml-4">
-						<h2 class="flex items-center">
-							Phoria Username
-							<IconVerifiedUser class="icon__secure w-4 h-4 ml-2" />
-						</h2>
-						<h4 class="flex items-center">
-							Phoria.tv/phoriausername
-							<IconCopy
-								@click="onCopyToClipboard('Phoria.tv/phoriausername')"
-								class="icon__copy w-5 h-5 ml-4 cursor-pointer"
-							/>
-						</h4>
-					</div>
+			<Flex justify-between items-stretch>
+				<Flex items-center class="py-2">
+					<UserbarUser />
 					<div
 						class="flex items-end space-x-3 text-base lg:text-xl font-light ml-8"
 					>
 						<p>0 Subs</p>
 						<p>0 Following</p>
 					</div>
-				</div>
-				<div>Tabs will goes here</div>
-			</div>
+				</Flex>
+				<Flex items-center class="space-x-8 text-xl font-bold text-primary">
+					<Flex
+						items-center
+						:to="tab.path"
+						:key="tab.name"
+						:class="{ active: $route.path === tab.path }"
+						class="home__tab h-full"
+						v-for="tab in tabs"
+						>{{ tab.name }}</Flex
+					>
+				</Flex>
+			</Flex>
 		</div>
 		<UserStories />
-		<div class="py-16 bg-secondary">
-			<Container v2>
-				<TButton>Create Subscription</TButton>
-				<CreatePost @add="onAddMedia" class="mt-7" />
-
-				<div class="posts mt-11">
-					<Post />
-				</div>
-			</Container>
-		</div>
+		<router-view />
 	</div>
 </template>
 
 <script>
 
-// Icons
-import IconCopy from '@/components/icons/IconCopy'
-import IconVerifiedUser from '@/components/icons/IconVerifiedUser'
-
 // Components
-import Post from '@/components/Post'
-import CreatePost from '@/components/CreatePost'
 import UserStories from '@/components/Stories'
+import UserbarUser from '@/components/UserbarUser'
 
 // Component object
 export default {
 	name: 'Home',
 	components: {
-		Post,
 		UserStories,
-		CreatePost,
-		// Icons
-		IconCopy,
-		IconVerifiedUser,
+		UserbarUser,
 	},
-	methods: {
-		onAddMedia() {
-
-		},
-		onMediaChoosed() {
-
-		},
-		onCopyToClipboard(text) {
-			var textArea = document.createElement("textarea");
-			textArea.value = text;
-
-			// Avoid scrolling to bottom
-			textArea.style.top = "0";
-			textArea.style.left = "0";
-			textArea.style.position = "fixed";
-
-			document.body.appendChild(textArea);
-			textArea.focus();
-			textArea.select();
-
-			try {
-				document.execCommand('copy');
-				this.$toast.open('Text copied to clipboard!')
-			} catch (err) {
-				this.$toast.open({
-					type: 'error',
-					message: 'Failed to copy the text'
-				})
-			}
-			document.body.removeChild(textArea);
+	data() {
+		return {
+			activeRoute: 'Feed',
+			tabs: [
+				{ name: 'My Feed', path: '/home' },
+				{ name: 'Videos', path: '/home/videos' },
+				{ name: 'Pictures', path: '/home/pictures' },
+				{ name: 'Referrals', path: '/home/referrals' }
+			]
 		}
-	}
+	},
+	watch: {
+		'$route': {
+			deep: true,
+			handler(v) {
+				console.log(v.path)
+				this.activeRoute = v.name
+			}
+		}
+	},
 }
 </script>
 <style lang="scss" scoped>
-	.icon {
-		&__secure {
-			fill: #00b9e8;
-		}
-		&__copy {
-			stroke: white;
+	.home {
+		&__tab {
+			position: relative;
+			&::before {
+				content: "";
+				bottom: 0;
+				left: 50%;
+				width: 90%;
+				height: 3px;
+				position: absolute;
+				transform: translateX(-50%);
+				background-color: white;
+				opacity: 0;
+				visibility: hidden;
+			}
+			&.active {
+				color: #00b9e8;
+				font-weight: lighter;
+				&::before {
+					opacity: 1;
+					visibility: visible;
+					animation: w-0-to-90 500ms ease-in-out;
+				}
+			}
 		}
 	}
 </style>
