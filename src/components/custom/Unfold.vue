@@ -1,7 +1,7 @@
 <template>
 	<div class="unfold">
 		<div
-			class="unfold__content text-white p-4 rounded overflow-hidden"
+			class="unfold__content text-white p-3 lg:p-4 rounded overflow-hidden"
 			:class="{ [content]: content, 'unfold__content-expanded': expanded }"
 		>
 			<p><slot /></p>
@@ -32,7 +32,10 @@ export default {
 <style lang='scss' scoped>
 	.unfold {
 		&__content {
-			max-height: 76px;
+			max-height:89px;
+			@include on("lg") {
+				max-height: 76px;
+			}
 			transition: max-height 500ms ease-out;
 		}
 		&__content-expanded {

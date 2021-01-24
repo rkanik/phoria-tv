@@ -5,15 +5,15 @@
 			text,
 			outlined,
 			[color]: color,
-			'py-4 px-5 text-xl': size === 'lg',
-			'py-3 px-4 text-xl': size === 'md',
-			'py-2 px-3 text-base': size === 'sm',
+			'text-sm py-2 px-3 md:py-3 md:px-4 lg:py-4 lg:px-5 lg:text-xl': size === 'lg',
+			'text-sm py-1 px-3 lg:py-3 lg:px-4 lg:text-xl': size === 'md',
+			'py-2 px-2 sm:px-3 text-sm sm:text-base': size === 'sm',
 			'py-1 px-2 text-base': size === 'xs',
 		}"
 		class="font-bold rounded border"
 		@click="onClick"
 	>
-		<div class="text-center flex items-center justify-center">
+		<div class="flex items-center justify-center whitespace-nowrap">
 			<slot />
 		</div>
 	</button>

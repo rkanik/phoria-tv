@@ -11,11 +11,17 @@
 			<div
 				class="profile__content absolute inset-0 flex flex-col justify-end items-center"
 			>
-				<h2 class="text-5xl text-primary font-bold flex items-center mb-2">
+				<h2
+					class="text-xl md:text-5xl text-primary font-bold flex items-center mb-2"
+				>
 					Phoria Username
-					<IconVerifiedUser class="profile__secure w-9 h-9 ml-2" />
+					<span class="material-icons text-xl ml-2 text-blue-300"
+						>verified_user</span
+					>
 				</h2>
-				<div class="w-60 h-60 rounded-xl relative overflow-hidden -mb-28">
+				<div
+					class="w-32 h-32 lg:w-44 lg:h-44 2xl:w-60 2xl:h-60 rounded-xl relative overflow-hidden -mb-16 lg:-mb-18 2xl:-mb-28"
+				>
 					<img
 						class="w-full h-full object-cover object-center"
 						src="@/assets/images/profile-thumb.png"
@@ -24,33 +30,44 @@
 				</div>
 			</div>
 		</div>
-		<div class="bg-primary flex">
-			<ul
-				class="py-3 flex flex-1 items-center justify-end space-x-4 text-cyan-accent font-bold text-base lg:text-3xl"
+		<Flex on="lg" class="bg-primary lg:pt-18 2xl:pt-0">
+			<Flex
+				items-center
+				justify-center
+				class="mt-20 2xl:mt-0 py-3 lg:justify-end flex-1 space-x-4 text-cyan-accent font-bold text-sm md:text-base lg:text-xl 2xl:text-3xl"
 			>
-				<li class="bg-secondary2 py-3 px-8">Top 10%</li>
-				<li class="py-3 px-8">234 Posts</li>
-				<li class="py-3 px-8">2.3k Likes</li>
-			</ul>
-			<div class="w-80"></div>
-			<ul
-				class="profile__tab flex items-center justify-start space-x-4 flex-1 relative font-bold text-base lg:text-3xl"
+				<div class="bg-secondary2 py-2 px-4 2xl:py-3 2xl:px-8">Top 10%</div>
+				<div class="py-2 px-4 2xl:py-3 2xl:px-8">234 Posts</div>
+				<div class="py-2 px-4 2xl:py-3 2xl:px-8">2.3k Likes</div>
+			</Flex>
+			<div class="hidden lg:block lg:w-48 2xl:w-80"></div>
+			<Flex
+				items-center
+				justify-center
+				class="profile__tab lg:mt-20 2xl:mt-0 lg:justify-start space-x-4 flex-1 relative font-bold text-base lg:text-xl 2xl:text-3xl"
 			>
-				<li class="h-full flex items-center cursor-pointer px-2 active">
+				<Flex items-center class="h-full py-3 cursor-pointer px-2 active">
 					Feed
-				</li>
-				<li class="h-full flex items-center cursor-pointer px-2">Videos</li>
-				<li class="h-full flex items-center cursor-pointer px-2">
+				</Flex>
+				<Flex items-center class="h-full py-3 cursor-pointer px-2"
+					>Videos</Flex
+				>
+				<Flex items-center class="h-full py-3 cursor-pointer px-2">
 					Pictures
-				</li>
-				<li class="h-full flex items-center cursor-pointer px-2 store">
+				</Flex>
+				<Flex
+					citems-center
+					lass="h-full py-3 store cursor-pointer px-2 store"
+				>
 					Store
-				</li>
-			</ul>
-		</div>
-		<div class="bg-secondary py-10 text-center">
-			<div class="container mx-auto">
-				<p class="text-lg text-white mb-12">Last Online 2 Hours Ago</p>
+				</Flex>
+			</Flex>
+		</Flex>
+		<div class="bg-secondary py-3 lg:py-10 text-center">
+			<Container>
+				<p class="text-sm lg:text-lg text-white mb-4 lg:mb-12">
+					Last Online 2 Hours Ago
+				</p>
 				<Unfold class="mx-auto text-left" content="bg-secondary2">
 					Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
 					nonumy eirmod tempor invidunt ut labore et dolore.. magna
@@ -66,9 +83,11 @@
 					duo dolores et ea rebum
 				</Unfold>
 
-				<div class="text-left flex flex-col space-y-6 mt-14">
+				<div
+					class="text-left flex flex-col space-y-3 lg:space-y-6 mt-3 lg:mt-14"
+				>
 					<div
-						class="subscription w-full mx-auto text-2xl font-bold text-white bg-primary p-4 rounded"
+						class="subscription w-full mx-auto text-base lg:text-2xl font-bold text-white bg-primary p-4 rounded"
 					>
 						Support Phoria Girl 9000
 					</div>
@@ -79,29 +98,31 @@
 							class="subscription w-full mx-auto text-white bg-secondary2 p-4 rounded flex justify-between cursor-pointer"
 							:class="{ active: sub.id === subscription.selected }"
 						>
-							<h3 class="text-2xl font-bold">{{ sub.title }}</h3>
-							<p class="text-2xl font-light">{{ sub.price }}</p>
+							<h3 class="text-base lg:text-2xl font-bold">
+								{{ sub.title }}
+							</h3>
+							<p class="text-base lg:text-2xl font-light">
+								{{ sub.price }}
+							</p>
 						</div>
 					</template>
-					<div class="text-center pt-4">
-						<p class="text-white text-xl font-light">
+					<div class="text-center pt-2 lg:pt-4">
+						<p class="text-white text-sm lg:text-xl font-light">
 							Normal Subscription is $14.99 per month
 						</p>
 					</div>
 				</div>
-			</div>
+			</Container>
 		</div>
 	</div>
 </template>
 
 <script>
-import IconVerifiedUser from '@/components/icons/IconVerifiedUser'
 import Unfold from '@/components/custom/Unfold'
 export default {
 	name: 'profile',
 	components: {
 		Unfold,
-		IconVerifiedUser
 	},
 	data() {
 		return {
@@ -147,7 +168,7 @@ export default {
 			background: rgba(0, 0, 0, 0.25);
 		}
 		&__tab {
-			li {
+			> div {
 				color: var(--yellow-1);
 				border-bottom: 3px solid transparent;
 				&.active {
@@ -164,7 +185,16 @@ export default {
 		max-width: 961px;
 	}
 	.subscription {
-		max-width: 1255px;
+		max-width: 100%;
+		@include on("md") {
+			max-width: 90%;
+		}
+		@include on("lg") {
+			max-width: 80%;
+		}
+		@include on("2xl") {
+			max-width: 1255px;
+		}
 		&.active {
 			background: linear-gradient(to bottom, #ffcf00, #8f7400);
 		}

@@ -31,21 +31,13 @@ export default {
 			default: true
 		},
 	},
-	// watch: {
-	// 	value: {
-	// 		immediate: true,
-	// 		handler(v) {
-	// 			document.body.classList.toggle('overflow-hidden', v)
-	// 		}
-	// 	}
-	// }
 }
 </script>
 
 <style lang='scss' scoped>
 	.img-preview {
-		backdrop-filter: blur(1rem);
-		background-color: rgba(0, 0, 0, 0.65);
+		backdrop-filter: blur(10px);
+		background-color: rgba(0, 0, 0, 0.35);
 		transition: all 300ms ease-in-out;
 	}
 </style>

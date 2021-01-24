@@ -19,6 +19,7 @@ button:focus {
    > div {
       background-color: var(--dark-1);
       border: 2px solid #00b9e8;
+      max-width: 800px;
       > button {
          font-size: 28px;
          color: white;

@@ -209,6 +209,8 @@ export default {
 
 <style lang='scss' scoped>
 	.signup {
-		min-width: 822px;
+		@include on("lg") {
+			min-width: 822px;
+		}
 	}
 </style>

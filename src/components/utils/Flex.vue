@@ -1,8 +1,8 @@
 <template>
-	<router-link v-if="to" :to="to" class="flex" :class="classes">
+	<router-link v-if="to" :to="to" :class="classes">
 		<slot />
 	</router-link>
-	<div v-else class="flex" :class="classes">
+	<div v-else :class="classes">
 		<slot />
 	</div>
 </template>
@@ -10,6 +10,10 @@
 export default {
 	name: 'Flex',
 	props: {
+		on: {
+			type: [String, Boolean],
+			default: false,
+		},
 		to: {
 			type: [String, Boolean],
 			default: false
@@ -58,6 +62,8 @@ export default {
 	computed: {
 		classes() {
 			return {
+				'flex': !this.on,
+				[`${this.on}:flex`]: this.on,
 				// Alignment
 				'items-center': this.itemsCenter,
 				'items-end': this.itemsEnd,

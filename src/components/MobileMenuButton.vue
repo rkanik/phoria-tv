@@ -1,6 +1,6 @@
 <template>
 	<button
-		class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-yellow-500"
+		class="sm:hidden inline-flex items-center justify-center p-1 -mt-2 rounded-md text-gray-400 hover:text-white hover:bg-yellow-500"
 		aria-expanded="false"
 		@click="$emit('input', !value)"
 	>

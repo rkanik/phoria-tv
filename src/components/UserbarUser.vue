@@ -1,11 +1,11 @@
 <template>
 	<Flex items-center>
 		<img
-			class="w-16 h-16 rounded-xl object-cover object-contain"
+			class="w-12 h-12 lg:w-16 lg:h-16 flex-shrink-0 rounded lg:rounded-xl object-cover object-center"
 			src="@/assets/images/profile-thumb.png"
 			alt="Profile thumbnail"
 		/>
-		<div class="text-base lg:text-xl text-primary font-bold ml-4">
+		<div class="text-base xl:text-xl text-primary font-bold ml-4">
 			<h2 class="flex items-center">
 				Phoria Username
 				<IconVerifiedUser class="icon__secure w-4 h-4 ml-2" />
@@ -14,7 +14,7 @@
 				Phoria.tv/phoriausername
 				<IconCopy
 					@click="onCopyToClipboard('Phoria.tv/phoriausername')"
-					class="icon__copy w-5 h-5 ml-4 cursor-pointer"
+					class="icon__copy w-4 h-4 lg:w-5 lg:h-5 ml-4 cursor-pointer"
 				/>
 			</h4>
 		</div>
@@ -26,8 +26,8 @@
 import IconCopy from '@/components/icons/IconCopy'
 import IconVerifiedUser from '@/components/icons/IconVerifiedUser'
 export default {
-   name: 'UserbarUser',
-   components: {
+	name: 'UserbarUser',
+	components: {
 		IconCopy,
 		IconVerifiedUser,
 	},

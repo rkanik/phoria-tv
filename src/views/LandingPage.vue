@@ -28,18 +28,24 @@
 			<div class="services__inner">
 				<div class="container mx-auto">
 					<div class="grid grid-cols-1 lg:grid-cols-3 bg-secondary">
-						<div class="service p-2 2xl:p-8 text-center mb-2 2xl:mb-0">
-							<h4 class="text-primary text-xl 2xl:text-2xl font-bold mb-4 2xl:mb-8">
+						<div class="service p-4 2xl:p-8 text-center mb-2 lg:mb-0">
+							<h4
+								class="text-primary text-xl 2xl:text-2xl font-bold mb-4 2xl:mb-8"
+							>
 								A Place For All Your Exclusive Content
 							</h4>
-							<p class="block text-base 2xl:text-2xl font-light text-white 2xl:mt-9">
+							<p
+								class="block text-base 2xl:text-2xl font-light text-white 2xl:mt-9"
+							>
 								Phoria hosts your images / videos private DMs. Only
 								accessible after you get paid what you've want from your
 								subscribers.
 							</p>
 						</div>
-						<div class="service p-2 2xl:p-8 text-center mb-2 2xl:mb-0">
-							<h4 class="text-primary text-xl 2xl:text-2xl font-bold mb-4 2xl:mb-8">
+						<div class="service p-4 2xl:p-8 text-center mb-2 lg:mb-0">
+							<h4
+								class="text-primary text-xl 2xl:text-2xl font-bold mb-4 2xl:mb-8"
+							>
 								Subscription Platform With Zero Fees
 							</h4>
 							<div class="flex items-center justify-center">
@@ -47,16 +53,22 @@
 								<IconLongArrowRight class="h-4 mx-8" />
 								<IconOpenPerson class="h-7" />
 							</div>
-							<p class="block text-base 2xl:text-2xl font-light text-white 2xl:mt-9">
+							<p
+								class="block text-base 2xl:text-2xl font-light text-white 2xl:mt-9"
+							>
 								We believe creators should earn more, and not feel
 								cheated for their hard work.
 							</p>
 						</div>
-						<div class="service p-2 2xl:p-8 text-center">
-							<h4 class="text-primary text-xl 2xl:text-2xl font-bold mb-4 2xl:mb-8">
+						<div class="service p-4 2xl:p-8 text-center">
+							<h4
+								class="text-primary text-xl 2xl:text-2xl font-bold mb-4 2xl:mb-8"
+							>
 								A Place For All Your Exclusive Content
 							</h4>
-							<p class="block text-base 2xl:text-2xl font-light text-white 2xl:mt-9">
+							<p
+								class="block text-base 2xl:text-2xl font-light text-white 2xl:mt-9"
+							>
 								Phoria hosts your images / videos private DMs. Only
 								accessible after you get paid what you've want from your
 								subscribers.
@@ -65,13 +77,17 @@
 					</div>
 				</div>
 			</div>
-			<div class="text-center text-base 2xl:text-2xl text-white font-bold py-3">
+			<div
+				class="text-center text-base 2xl:text-2xl text-white font-bold py-3"
+			>
 				Interested in using our platform?
 			</div>
 		</div>
 		<div class="subscribe bg-primary p-7 text-center text-white">
 			<div class="container mx-auto">
-				<h3 class="subscribe__title text-base 2xl:text-2xl text-white mx-auto">
+				<h3
+					class="subscribe__title text-base 2xl:text-2xl text-white mx-auto"
+				>
 					<router-link to="/signup" class="text-primary font-bold"
 						>Sign up</router-link
 					>
@@ -87,29 +103,29 @@
 							id="name"
 							type="text"
 							placeholder="Enter Full Name"
-							class="text-2xl w-full bg-secondary text-white p-3"
+							class="text-base lg:text-xl 2xl:text-2xl w-full bg-secondary text-white py-1 md:py-2 px-2 md:px-3 2xl:p-4"
 						/>
 					</div>
-					<div class="subscribe__input-group mx-auto relative mt-4">
+					<div class="subscribe__input-group mx-auto relative mt-2 md:mt-3 2xl:mt-4">
 						<label for="email" class="sr-only">Email</label>
 						<input
 							id="email"
 							type="email"
 							placeholder="Your Email"
-							class="text-2xl w-full bg-secondary text-white p-3"
+							class="text-base lg:text-xl 2xl:text-2xl w-full bg-secondary text-white py-1 md:py-2 px-2 md:px-3 2xl:p-4"
 						/>
 					</div>
-					<div class="subscribe__input-group mx-auto relative mt-4">
+					<div class="subscribe__input-group mx-auto relative mt-2 md:mt-3 2xl:mt-4">
 						<label for="name" class="sr-only">Name</label>
 						<input
 							id="instagram"
 							type="text"
 							placeholder="Instagram Handle"
-							class="text-2xl w-full bg-secondary text-white p-3"
+							class="text-base lg:text-xl 2xl:text-2xl w-full bg-secondary text-white py-1 md:py-2 px-2 md:px-3 2xl:p-4"
 						/>
 					</div>
 					<button
-						class="bg-yellow-accent3 text-xl font-bold uppercase mt-4 py-3"
+						class="bg-yellow-accent3 lg:text-xl 2xl:text-2xl font-bold uppercase mt-2 md:mt-3 2xl:mt-4 py-1 md:py-2 px-2 md:px-3 2xl:p-4"
 					>
 						Submit
 					</button>
@@ -150,9 +166,9 @@ export default {
 		}
 		&__img2 {
 			max-height: 150px;
-         transform: translateY(-50%);
-         @include on("2xl") {
-            max-height: 681px;
+			transform: translateY(-50%);
+			@include on("2xl") {
+				max-height: 681px;
 			}
 		}
 		&__content {
@@ -172,7 +188,10 @@ export default {
 		}
 		button,
 		&__input-group {
-			width: 347px;
+			width: 100%;
+			@include on("sm") {
+				width: 347px;
+			}
 		}
 		input::placeholder {
 			color: #727272;

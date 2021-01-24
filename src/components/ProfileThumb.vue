@@ -1,6 +1,6 @@
 <template>
 	<img
-		class="object-cover object-contain"
+		class="object-cover object-center"
 		src="@/assets/images/profile-thumb.png"
 		alt="Profile thumbnail"
 	/>

@@ -46,6 +46,16 @@ const router = new VueRouter({
                      path: 'videos',
                      name: 'Videos',
                      component: _import('Home/Videos')
+                  },
+                  {
+                     path: 'pictures',
+                     name: 'Pictures',
+                     component: _import('Home/Feed')
+                  },
+                  {
+                     path: 'referrals',
+                     name: 'Referrals',
+                     component: _import('Home/Feed')
                   }
                ]
             },

@@ -1,11 +1,11 @@
 <template>
 	<div class="videos bg-secondary">
 		<Container>
-			<div class="py-12">
+			<div class="py-3 lg:py-12 font-bold text-xl lg:text-2xl 2xl:text-2xl">
 				<h4>Video Feed</h4>
 			</div>
 			<div
-				class="grid gap-12 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 pb-12"
+				class="grid gap-3 sm:gap-5 md:gap-8 2xl:gap-12 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 pb-12"
 			>
 				<Video v-for="(video, vI) in videos" :video="video" :key="vI" />
 			</div>

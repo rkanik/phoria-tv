@@ -5,6 +5,7 @@ const initialState = () => ({
 
 const getters = {
    isAuth: ({ isAuth }) => isAuth,
+   $isAuth: ({ isAuth }) => isAuth,
    $user: ({ user }) => user
 }
 

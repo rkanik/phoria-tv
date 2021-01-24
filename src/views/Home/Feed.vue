@@ -1,15 +1,17 @@
 <template>
 	<div class="feed">
-		<div class="py-16 bg-secondary">
+		<div class="py-3 md:py-5 lg:py-16 bg-secondary">
 			<Container v2>
-				<TButton @click="createSubsModal = true"
-					>Create Subscription</TButton
-				>
-				<TButton class="ml-8" @click="createPromoModal = true"
-					>Manage Promotions</TButton
-				>
-				<CreatePost @create="(p) => posts.unshift(p)" class="mt-7" />
-				<div class="posts mt-11">
+				<Flex class="space-x-2 md:space-x-4 xl:space-x-6 md:block">
+					<TButton @click="createSubsModal = true" class="flex-1"
+						>Create Subscription</TButton
+					>
+					<TButton class="flex-1" @click="createPromoModal = true"
+						>Manage Promotions</TButton
+					>
+				</Flex>
+				<CreatePost @create="(p) => posts.unshift(p)" class="mt-3 md:mt-7" />
+				<div class="posts mt-4 md:mt-11">
 					<Post
 						v-for="(post, postI) in posts"
 						:post="post"

@@ -1,8 +1,10 @@
 <template>
-	<div class="createp pt-6 px-12 bg-primary rounded">
+	<div class="createp pt-3 md:pt-6 px-3 md:px-8 lg:px-12 bg-primary rounded">
 		<Flex>
-			<ProfileThumb class="w-16 h-16 rounded-xl" />
-			<div class="ml-6 flex-auto">
+			<ProfileThumb
+				class="w-12 h-12 md:w-16 md:h-16 rounded md:rounded-xl"
+			/>
+			<div class="ml-3 md:ml-6 flex-auto">
 				<label for="createp-textarea" class="sr-only">Create Post</label>
 				<textarea
 					v-model="post.text"
@@ -25,11 +27,11 @@
 			<template v-for="(img, mi) in post.images">
 				<div
 					:key="mi"
-					class="relative w-24 h-24"
+					class="relative h-12 w-12 lg:w-24 lg:h-24"
 					@click="post.images.splice(mi, 1)"
 				>
 					<img
-						class="w-full h-full rounded-xl object-cover object-center"
+						class="w-full h-full rounded lg:rounded-xl object-cover object-center"
 						alt="Create post image"
 						:src="img"
 					/>
@@ -44,15 +46,15 @@
 			</template>
 		</Flex>
 		<hr class="createp__hr" />
-		<Flex justify-between>
+		<Flex justify-between class="flex-wrap">
 			<Flex itemsCenter class="py-3">
 				<TButton @click="onAddUpload" text size="sm">
-					<IconAddImage class="fill-white mr-2" />
+					<i class="material-icons mr-2 text-xl">add_photo_alternate</i>
 					Add Media
 				</TButton>
-				<hr class="createp__bhr mx-4" />
+				<hr class="createp__bhr mx-2 md:mx-4" />
 				<TButton text size="sm">
-					<IconDollar class="fill-white mr-2" />
+					<i class="material-icons mr-2 text-xl">monetization_on</i>
 					Create Tip Goal
 				</TButton>
 			</Flex>
@@ -60,7 +62,7 @@
 				<TButton
 					size="sm"
 					color="primary"
-               v-if="validPost"
+					v-if="validPost"
 					:disabled="!validPost"
 					@click="$emit('create', post)"
 					>Publish Post</TButton
@@ -73,8 +75,6 @@
 <script>
 
 // Icons
-import IconDollar from '@/components/icons/IconDollar'
-import IconAddImage from '@/components/icons/IconAddImage'
 import IconClose from '@/components/icons/IconClose'
 
 // Components
@@ -84,8 +84,6 @@ export default {
 	name: 'CreatePost',
 	components: {
 		ProfileThumb,
-		IconDollar,
-		IconAddImage,
 		IconClose
 	},
 	data() {

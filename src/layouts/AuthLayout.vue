@@ -1,11 +1,12 @@
 <template>
 	<div class="auth py-4 relative">
 		<div class="auth__bg"></div>
-		<perfect-scrollbar class="auth__ps inset-0 py-4 h-full w-full">
-			<div class="pt-4 md:pt-56 pb-4 md:pb-28 mx-auto w-max">
+		<perfect-scrollbar class="auth__ps inset-0 py-4 h-full w-full px-4">
+			<div class="pt-4 md:pt-56 pb-4 md:pb-28 mx-auto lg:w-max">
 				<Flex items-center class="justify-between md:justify-end">
 					<h2 class="mr-6 text-xl 2xl:text-4xl font-bold">
-						PhoriaTV {{ $route.path === "/signup" ? "Sign Up" : "Login" }}
+						PhoriaTV
+						{{ $route.path === "/signup" ? "Sign Up" : "Login" }}
 					</h2>
 					<div>
 						<TButton

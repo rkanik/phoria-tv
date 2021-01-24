@@ -1,29 +1,33 @@
 <template>
 	<div class="home">
-		<div class="container mx-auto">
-			<Flex justify-between items-stretch>
-				<Flex items-center class="py-2">
+		<Container>
+			<Flex on="lg" justify-between items-stretch class="pt-4 lg:pt-0">
+				<Flex on="sm" items-center class="lg:py-4">
 					<UserbarUser />
-					<div
-						class="flex items-end space-x-3 text-base lg:text-xl font-light ml-8"
+					<Flex
+						items-end
+						class="space-x-3 text-sm text-secondary sm:text-base font-light mt-3 sm:mt-0 sm:ml-8"
 					>
 						<p>0 Subs</p>
 						<p>0 Following</p>
-					</div>
+					</Flex>
 				</Flex>
-				<Flex items-center class="space-x-8 text-xl font-bold text-primary">
+				<Flex
+					items-center
+					class="space-x-4 lg:space-x-8 text-sm md:text-base xl:text-xl font-bold text-primary"
+				>
 					<Flex
 						items-center
 						:to="tab.path"
 						:key="tab.name"
 						:class="{ active: $route.path === tab.path }"
-						class="home__tab h-full"
+						class="home__tab h-12 lg:h-full"
 						v-for="tab in tabs"
 						>{{ tab.name }}</Flex
 					>
 				</Flex>
 			</Flex>
-		</div>
+		</Container>
 		<UserStories />
 		<router-view />
 	</div>
