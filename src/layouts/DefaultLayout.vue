@@ -1,7 +1,10 @@
 <template>
 	<div class="default-layout">
 		<Header />
-		<perfect-scrollbar class="default-layout__ps">
+		<perfect-scrollbar
+			class="default-layout__ps"
+			:style="`height:calc(100vh - ${headerHeight}px)`"
+		>
 			<main>
 				<router-view />
 			</main>
@@ -19,18 +22,29 @@ export default {
 	components: {
 		Header
 	},
+	data() {
+		return {
+			headerHeight: 0
+		}
+	},
 	computed: {
 		...mapGetters('Auth', ['isAuth'])
+	},
+	mounted() {
+		this.headerHeight = this.getHeight('header.header')
+	},
+	methods: {
+		getHeight(cls) {
+			return document
+				.querySelector(cls)
+				?.getBoundingClientRect()
+				.height
+		}
 	}
 }
 </script>
 
 <style lang='scss' scoped>
-	.default-layout {
-		&__ps {
-			height: calc(100vh - 88px);
-		}
-	}
 	.auth {
 		position: relative;
 		min-height: 100vh;

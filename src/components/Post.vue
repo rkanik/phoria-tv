@@ -15,7 +15,9 @@
 				<h4 class="text-base lg:text-xl 2xl:text-2xl font-bold">
 					{{ post.user.fullName }}
 				</h4>
-				<p class="text-base lg:text-xl 2xl:text-2xl font-bold text-cyan-accent">
+				<p
+					class="text-base lg:text-xl 2xl:text-2xl font-bold text-cyan-accent"
+				>
 					{{ post.user.username }}
 				</p>
 			</div>
@@ -43,7 +45,9 @@
 		</div>
 		<Flex class="mt-5" justify-between items-center>
 			<TButton size="md" class="text-cyan-accent hover:text-white">
-				<span class="material-icons text-base mr-2">chat_bubble</span>
+				<span class="material-icons text-base lg:text-lg 2xl:text-2xl mr-2"
+					>chat_bubble</span
+				>
 				<span>Send Tip</span>
 			</TButton>
 			<div class="font-bold text-base lg:text-2xl">22 Likes</div>

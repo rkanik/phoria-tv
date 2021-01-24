@@ -88,6 +88,13 @@ const navs = [
 	}
 ]
 
+const inboxNav = {
+	type: 'link',
+	path: '/direct/inbox',
+	icon: 'mark_email_unread',
+	name: 'Inbox'
+}
+
 export default {
 	name: 'navbar',
 	components: {
@@ -113,12 +120,8 @@ export default {
 				type: 'link',
 				path: `/${this.$user.username}`,
 				icon: 'contact_mail'
-			}, {
-				type: 'link',
-				path: '/signup',
-				icon: 'mark_email_unread',
-				name: 'Signup'
-			}, { ... this.notifyDropdown })
+			}, inboxNav, { ... this.notifyDropdown })
+			this.mobileNavs.push(inboxNav)
 		}
 	},
 	computed: {

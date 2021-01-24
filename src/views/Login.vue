@@ -36,7 +36,7 @@
 					<TButton
 						size="sm"
 						color="primary"
-						class="px-10 block ml-auto"
+						class="px-10 mt-3 lg:mt-0 block ml-auto"
 						:disabled="invalid"
 						>Login</TButton
 					>
@@ -75,8 +75,8 @@ export default {
 			let { error, message } = await this.loginUser(this.user)
 			if (error) {
 				return this.$toast.error(message)
-         }
-         this.$toast.open(message)
+			}
+			this.$toast.open(message)
 			this.$router.push('/')
 		}
 	}
@@ -85,6 +85,8 @@ export default {
 
 <style lang='scss' scoped>
 	.login {
-		min-width: 822px;
+		@include on("lg") {
+			min-width: 822px;
+		}
 	}
 </style>
