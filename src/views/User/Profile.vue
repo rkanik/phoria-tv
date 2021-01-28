@@ -83,7 +83,18 @@
 					duo dolores et ea rebum
 				</Unfold>
 
+				<Container v2 v-if="paidUser">
+					<div
+						class="my-8 flex lg:block justify-center space-x-4 lg:space-x-8"
+					>
+						<TButton size="lg" class="flex-1">Message</TButton>
+						<TButton size="lg" class="flex-1">Send A Tip</TButton>
+					</div>
+					<Post :post="post" class="mb-7" />
+				</Container>
+
 				<div
+					v-else
 					class="text-left flex flex-col space-y-3 lg:space-y-6 mt-3 lg:mt-14"
 				>
 					<div
@@ -118,14 +129,29 @@
 </template>
 
 <script>
+import Post from '@/components/Post'
 import Unfold from '@/components/custom/Unfold'
+import { mapGetters } from 'vuex'
 export default {
 	name: 'profile',
 	components: {
+		Post,
 		Unfold,
 	},
 	data() {
 		return {
+			post: {
+				text: `Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+                  nonumy eirmod tempor invidunt ut labore et dolore.. magna aliquyam
+                  erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+                  et ea rebum`,
+				user: {
+					fullName: 'RK Anik',
+					username: '@rkanik',
+					thumbnail: require('@/assets/images/profile-thumb.png'),
+				},
+				images: [require('@/assets/images/post.png')],
+			},
 			subscription: {
 				selected: 1,
 				list: [
@@ -151,6 +177,13 @@ export default {
 					}
 				]
 			}
+		}
+	},
+	computed: {
+		...mapGetters('Auth', ['$user']),
+		paidUser() {
+			console.log(this.$user)
+			return (this.$user && this.$user.subscription) && this.$user.subscription.trim() !== ''
 		}
 	}
 }

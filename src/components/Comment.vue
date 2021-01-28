@@ -2,6 +2,7 @@
 	<div>
 		<Flex>
 			<div
+				v-if="!ghost"
 				class="relative h-9 w-9 lg:h-11 lg:w-11 rounded-full flex-none overflow-hidden"
 			>
 				<img
@@ -11,7 +12,9 @@
 			</div>
 			<div class="ml-3 lg:ml-5">
 				<p class="text-base lg:text-lg">
-					<a href="#" class="font-bold">{{ user.username }}</a>
+					<a v-if="!ghost" href="#" class="font-bold">{{
+						user.username
+					}}</a>
 					{{ comment }}
 				</p>
 			</div>
@@ -39,6 +42,7 @@ export default {
 				required: true
 			}
 		},
+		ghost: Boolean,
 		comment: {
 			type: String,
 			required: true

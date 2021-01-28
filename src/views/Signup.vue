@@ -6,11 +6,12 @@
 					<img
 						class="rounded-xl mb-2 object-cover object-center w-44 h-44"
 						:src="
-							userAvatar ||
+							userCroppedAvatar ||
 							require('@/assets/images/Phoria-Logo_YBBG.png')
 						"
 						alt="Registration Avatar"
 					/>
+
 					<button
 						class="font-bold flex items-center justify-center w-full"
 						@click="onClickUpload"
@@ -42,10 +43,30 @@
 										"
 										:textarea="field.textarea || false"
 										:class="field.class || ' mb-1 md:mb-6'"
+										:helpText="field.helpText || ''"
 										v-model="field.value"
 										@change="onChangeInput"
+										helpClass="text-center"
 										inputClass="w-full md:w-96"
-									/>
+									>
+										<template v-slot:help-text>
+											<p
+												v-if="
+													field.name === 'username' &&
+													!errors.length
+												"
+											>
+												This will be displayed as
+												<span class="text-yellow-300">
+													https://phoria.tv/{{
+														!!field.value
+															? field.value
+															: field.hint
+													}}
+												</span>
+											</p>
+										</template>
+									</TInput>
 								</Validate>
 							</template>
 							<TButton
@@ -53,7 +74,7 @@
 								color="primary"
 								class="px-10 block ml-auto"
 								:disabled="invalid || cPassInvalid"
-								>Signup</TButton
+								>Sign Up</TButton
 							>
 						</form>
 					</ValidationObserver>
@@ -67,14 +88,39 @@
 			style="display: none"
 			accept="image/x-png,image/gif,image/jpeg"
 			@input="onInputAvatar"
+			@close="userAvatar = null"
 		/>
+		<Modal done v-model="avatarCropperModal">
+			<div class="bg-secondary rounded overflow-hidden">
+				<cropper
+					v-if="userAvatar"
+					:src="userAvatar"
+					:stencilProps="{ aspectRatio: 1 }"
+					classname="h-96"
+					@change="change"
+				></cropper>
+				<div class="bg-secondary2 shadow-xl p-4">
+					<TButton
+						size="sm"
+						color="primary"
+						class="ml-auto block"
+						@click="onCropImage"
+						>Crop Image</TButton
+					>
+				</div>
+			</div>
+		</Modal>
 	</AuthLayout>
 </template>
 
 <script>
 
-import AuthLayout from '@/layouts/AuthLayout'
+import { Cropper } from 'vue-advanced-cropper'
 
+import AuthLayout from '@/layouts/AuthLayout'
+import Modal from '@/components/utils/Modal'
+
+import { getToast } from '../markup/toast'
 import { miniId } from '../helpers'
 import { extend } from 'vee-validate';
 import { required, email, min, max } from 'vee-validate/dist/rules';
@@ -88,13 +134,19 @@ extend('required', required);
 export default {
 	name: 'signup',
 	components: {
-		AuthLayout
+		Modal,
+		Cropper,
+		AuthLayout,
 	},
 	data() {
 		return {
 			// Booleans
 			showPassword: false,
+
 			userAvatar: null,
+			avatarCropperModal: false,
+			userCroppedAvatar: null,
+			userCropperCanvas: null,
 
 			// Objects
 			user: {
@@ -103,7 +155,7 @@ export default {
 					rules: 'required|min:3|max:16',
 					name: 'username',
 					hint: 'JohnnyBravo',
-					label: 'Username*'
+					label: 'Username*',
 				},
 				email: {
 					value: '',
@@ -155,6 +207,18 @@ export default {
 	},
 	methods: {
 		...mapActions('Users', ['addUser']),
+		...mapActions('Auth', ['loginUser']),
+		change({ canvas }) {
+			this.userCropperCanvas = canvas
+		},
+		onCropImage() {
+			this.userCroppedAvatar =
+				this.userCropperCanvas.toDataURL()
+			this.avatarCropperModal = false
+			this.userAvatar = null
+			this.userCropperCanvas = null
+			this.$refs.avatarInput.value = ''
+		},
 		onChangeInput({ name, value }) {
 			if (name === 'confirmPassword') {
 				if (value !== this.user.password.value) {
@@ -170,14 +234,24 @@ export default {
 		},
 		onInputAvatar(e) {
 			const file = e.target.files[0]
+			this.userAvatarFile = file
 			const reader = new FileReader();
 			reader.addEventListener("load", () => {
 				this.userAvatar = reader.result;
+				setTimeout(() => {
+					this.avatarCropperModal = true
+				}, 500);
 			}, false);
 
 			if (file) {
 				reader.readAsDataURL(file);
 			}
+		},
+		async login(user) {
+			let { error, message } = await this.loginUser(user)
+			if (error) return this.$toast.error(getToast(message))
+			this.$toast.open(getToast(message))
+			this.$router.push('/home')
 		},
 		async onSubmit(reset) {
 			const user = {
@@ -187,21 +261,20 @@ export default {
 						{ ...user, [key]: value }
 					), {}),
 				id: miniId(),
-				avatar: this.userAvatar,
+				avatar: this.userCroppedAvatar,
 				createdAt: Date.now()
 			}
 			let { error, message } = await this.addUser(user)
-			this.$toast.open({
-				message,
-				type: error ? 'error' : 'success',
+			this.$toast.open({ message: getToast(message), type: error ? 'error' : 'success' })
+			if (error) return
+
+			Object.keys(this.user).forEach(field => (this.user[field].value = ''))
+			this.userCroppedAvatar = null
+			reset()
+			this.login({
+				email: user.email,
+				password: user.password
 			})
-			if (!error) {
-				Object.keys(this.user).forEach(field => {
-					this.user[field].value = ''
-				})
-				this.userAvatar = null
-				reset()
-			}
 		}
 	}
 }

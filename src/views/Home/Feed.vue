@@ -10,7 +10,10 @@
 						>Manage Promotions</TButton
 					>
 				</Flex>
-				<CreatePost @create="(p) => posts.unshift(p)" class="mt-3 md:mt-7" />
+				<CreatePost
+					@create="(p) => posts.unshift(p)"
+					class="mt-3 md:mt-7"
+				/>
 				<div class="posts mt-4 md:mt-11">
 					<Post
 						v-for="(post, postI) in posts"
@@ -28,7 +31,10 @@
 			:showing="createSubsModal"
 			@close="createSubsModal = false"
 		>
-			<CreateSubscription @cancel="createSubsModal = false" />
+			<CreateSubscription
+				@create="onCreateSubsription"
+				@cancel="createSubsModal = false"
+			/>
 		</TModal>
 		<TModal
 			class="modal"
@@ -49,6 +55,8 @@ import Post from '@/components/Post'
 import CreatePost from '@/components/CreatePost'
 import CreateCampaign from '@/components/CreateCampaign'
 import CreateSubscription from '@/components/CreateSubscription'
+import { mapGetters, mapMutations } from 'vuex'
+import { getToast } from '../../markup/toast'
 
 export default {
 	name: 'Feed',
@@ -79,5 +87,25 @@ export default {
 			]
 		}
 	},
+	computed: {
+		...mapGetters('Auth', ['$user', '$isAuth'])
+	},
+	methods: {
+		...mapMutations('Auth', ['setAuthState']),
+		onCreateSubsription(subscription) {
+			console.log(subscription, this.$user)
+			if (this.$isAuth) {
+				this.setAuthState({ user: { ...this.$user, subscription } })
+				this.createSubsModal = false
+			}
+			else {
+				this.$router.push('/login?ref=profile&action=create-subscription')
+				this.$toast.open({
+					type: 'warning',
+					message: getToast('You are not logged in. Please login first to continue.')
+				})
+			}
+		}
+	}
 }
 </script>

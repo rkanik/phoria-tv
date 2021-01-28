@@ -54,20 +54,49 @@
 		</Flex>
 		<Comment
 			class="mt-5"
+			:key="comIndex"
 			:user="post.user"
-			comment="Lorem ipsum dolor
-					sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-					tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-					voluptua."
+			:comment="com.text"
+			:ghost="com.ghost"
+			v-for="(com, comIndex) in comments"
 		/>
-		<Comment
-			class="mt-5"
-			:user="post.user"
-			comment="Lorem ipsum dolor
-					sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-					tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-					voluptua."
-		/>
+		<hr class="my-4 border-t-2 border-secondary" />
+		<div>
+			<textarea
+				name="commnent"
+				v-model="comment"
+				placeholder="Type a message"
+				class="w-full bg-transparent text-base 2xl:text-xl"
+			/>
+			<div class="flex justify-end space-x-4">
+				<button
+					@click="sendComment({ ghost: true })"
+					class="bg-cyan-500 items-center flex space-x-2 py-1 lg:py-2 px-4"
+				>
+					<svg width="16.968" height="22.624">
+						<path
+							data-name="Icon awesome-ghost"
+							d="M8.223 0A8.72 8.72 0 000 8.84V20.5a.707.707 0 001.207.5l1.1-.819a.707.707 0 01.95.1l1.9 2.136a.707.707 0 001 0l1.8-2.026a.707.707 0 011.057 0l1.8 2.026a.707.707 0 001 0l1.9-2.136a.707.707 0 01.95-.1l1.1.819a.707.707 0 001.207-.5V8.484A8.484 8.484 0 008.223 0zM5.656 9.9A1.414 1.414 0 117.07 8.484 1.414 1.414 0 015.656 9.9zm5.656 0a1.414 1.414 0 111.414-1.414A1.414 1.414 0 0111.312 9.9z"
+							fill="#fff"
+						/>
+					</svg>
+					<span>Ghost On</span>
+					<svg width="16" height="16">
+						<path
+							data-name="Icon ionic-ios-information-circle"
+							d="M8 0a8 8 0 108 8 8 8 0 00-8-8zm.731 11.692H7.262V6.15h1.469zm-.735-6.146a.768.768 0 11.8-.769.771.771 0 01-.8.769z"
+							fill="#fff"
+						/>
+					</svg>
+				</button>
+				<button
+					@click="sendComment"
+					class="bg-secondary2 py-1 lg:py-2 px-4"
+				>
+					Send
+				</button>
+			</div>
+		</div>
 		<ImagePreview v-model="imagePreview" />
 	</div>
 </template>
@@ -94,7 +123,33 @@ export default {
 	},
 	data() {
 		return {
+			comment: '',
 			imagePreview: false,
+			comments: [
+				{
+					ghost: false,
+					text: `Lorem ipsum dolor
+					sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+					tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+					voluptua.`
+				},
+				{
+					ghost: false,
+					text: `Lorem ipsum dolor
+					sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+					tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+					voluptua.`
+				}
+			]
+		}
+	},
+	methods: {
+		sendComment({ ghost }) {
+			this.comments.push({
+				ghost: ghost || false,
+				text: this.comment
+			})
+			this.comment = ''
 		}
 	}
 }

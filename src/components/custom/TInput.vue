@@ -15,11 +15,12 @@
 				@keyup="$emit('change', { name, value: $event.target.value })"
 			/>
 			<small
-				v-if="helpText"
-				v-html="helpText"
 				:class="helpClass"
 				class="block text-base mt-1 text-gray-300"
-			></small>
+			>
+				{{ helpText }}
+				<slot name="help-text"></slot>
+			</small>
 			<p v-if="error" class="text-red-500">{{ error }}</p>
 		</div>
 	</Flex>

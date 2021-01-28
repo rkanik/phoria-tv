@@ -5,7 +5,7 @@
 				<div class="text-center w-max flex-none">
 					<div class="relative rounded lg:rounded-xl 2xl:rounded-3xl overflow-hidden">
 						<img
-							class="w-14 h-14 md:w-16 md:h-16 lg:w-24 lg:h-24 2xl:w-32 2xl:h-32 object-cover object-center mx-auto"
+							class="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 2xl:w-24 2xl:h-24 object-cover object-center mx-auto"
 							src="@/assets/images/profile-thumb.png"
 							alt="Profile thumbnail"
 						/>
@@ -24,7 +24,7 @@
 				<template v-for="num in 10">
 					<div :key="num" class="text-center w-max flex-none">
 						<img
-							class="w-14 h-14 md:w-16 md:h-16 lg:w-24 lg:h-24 2xl:w-32 2xl:h-32 rounded lg:rounded-xl 2xl:rounded-3xl object-cover object-center mx-auto"
+							class="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 2xl:w-24 2xl:h-24 rounded lg:rounded-xl 2xl:rounded-3xl object-cover object-center mx-auto"
 							src="@/assets/images/my-day.png"
 							alt="User Story"
 						/>

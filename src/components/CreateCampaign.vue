@@ -1,5 +1,5 @@
 <template>
-	<div class="lg:p-16">
+	<div class="p-2 lg:p-16">
 		<h4 class="text-xl lg:text-2xl xl:text-3xl font-bold">
 			Promotional Sales
 		</h4>

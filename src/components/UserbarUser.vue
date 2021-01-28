@@ -25,6 +25,7 @@
 // Icons
 import IconCopy from '@/components/icons/IconCopy'
 import IconVerifiedUser from '@/components/icons/IconVerifiedUser'
+import { getToast } from '../markup/toast';
 export default {
 	name: 'UserbarUser',
 	components: {
@@ -47,11 +48,11 @@ export default {
 
 			try {
 				document.execCommand('copy');
-				this.$toast.open('Text copied to clipboard!')
+				this.$toast.open(getToast('Text copied to clipboard!'))
 			} catch (err) {
 				this.$toast.open({
 					type: 'error',
-					message: 'Failed to copy the text'
+					message: getToast('Failed to copy the text')
 				})
 			}
 			document.body.removeChild(textArea);

@@ -26,6 +26,16 @@ button:focus {
       }
    }
 }
+.pt-modal {
+   backdrop-filter: blur(1rem);
+   > div {
+      max-width: 90%;
+      position: relative;
+      @include on("lg") {
+         max-width: 800px;
+      }
+   }
+}
 
 .v-toast {
    &__item {

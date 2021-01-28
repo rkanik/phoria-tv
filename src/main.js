@@ -10,8 +10,8 @@ import PerfectScrollbar from 'vue2-perfect-scrollbar'
 import './registerServiceWorker'
 
 // Styles
+import './assets/css/toast.css';
 import './assets/css/tailwind.css'
-import 'vue-toast-notification/dist/theme-sugar.css';
 import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
 import './assets/scss/main.scss'
 
@@ -22,7 +22,9 @@ Vue.config.productionTip = false
 components.register(Vue)
 
 // Plugins
-Vue.use(VueToast);
+Vue.use(VueToast, {
+   dismissible: false
+});
 Vue.use(PerfectScrollbar)
 
 new Vue({

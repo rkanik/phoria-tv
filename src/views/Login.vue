@@ -52,6 +52,7 @@ import AuthLayout from '@/layouts/AuthLayout'
 import { extend } from 'vee-validate';
 import { required, email } from 'vee-validate/dist/rules';
 import { mapActions } from 'vuex';
+import { getToast } from '../markup/toast';
 
 extend('email', email);
 extend('required', required);
@@ -74,10 +75,10 @@ export default {
 		async onSubmit() {
 			let { error, message } = await this.loginUser(this.user)
 			if (error) {
-				return this.$toast.error(message)
+				return this.$toast.error(getToast(message))
 			}
-			this.$toast.open(message)
-			this.$router.push('/')
+			this.$toast.open(getToast(message))
+			this.$router.push('/home')
 		}
 	}
 }

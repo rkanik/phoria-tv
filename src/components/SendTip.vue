@@ -1,5 +1,5 @@
 <template>
-	<div class="lg:p-16">
+	<div class="p-3 lg:p-16">
 		<div class="text-center">
 			<img
 				alt="profile-pic"

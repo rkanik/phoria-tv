@@ -3,13 +3,20 @@
 		<Container class="px-2">
 			<Flex items-center class="sm:justify-between">
 				<router-link to="/" class="mr-auto sm:mr-0">
+					<img
+						v-if="isAuthPath"
+						alt="PhoriaTV Logo Black White"
+						class="w-8 h-8 lg:w-12 lg:h-12 2xl:w-16 2xl:h-16"
+						src="../assets/images/phoria-logo-white-256.png"
+					/>
 					<Flex
+						v-else
 						class="bg-secondary2 rounded 2xl:rounded-xl overflow-hidden"
 					>
 						<img
-							class="w-8 h-8 lg:w-12 lg:h-12 2xl:w-16 2xl:h-16"
-							src="../assets/images/PhoriaTVLogo.png"
 							alt="PhoriaTVLogo"
+							src="../assets/images/PhoriaTVLogo.png"
+							class="w-8 h-8 lg:w-12 lg:h-12 2xl:w-16 2xl:h-16"
 						/>
 						<div
 							class="header__title text-base lg:text-2xl 2xl:text-3xl text-white font-bold flex items-center px-2 2xl:px-3"
@@ -114,19 +121,27 @@ export default {
 
 		}
 	},
-	created() {
-		if (this.$isAuth) {
-			this.navs.splice(1, 0, {
-				type: 'link',
-				path: `/${this.$user.username}`,
-				icon: 'contact_mail'
-			}, inboxNav, { ... this.notifyDropdown })
-			this.mobileNavs.push(inboxNav)
-		}
-	},
 	computed: {
 		...mapGetters('Auth', ['$isAuth', '$user']),
+		isAuthPath() {
+			return ['/login', '/signup'].includes(this.$route.path)
+		}
 	},
+	watch: {
+		'$isAuth': {
+			immediate: true,
+			handler(isAuth) {
+				if (isAuth) {
+					this.navs.splice(1, 0, {
+						type: 'link',
+						path: `/${this.$user.username}`,
+						icon: 'contact_mail'
+					}, inboxNav, { ... this.notifyDropdown })
+					this.mobileNavs.push(inboxNav)
+				}
+			}
+		}
+	}
 }
 </script>
 

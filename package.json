@@ -15,6 +15,7 @@
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "vee-validate": "^3.4.5",
     "vue": "^2.6.11",
+    "vue-advanced-cropper": "^0.20.1",
     "vue-click-outside": "^1.1.0",
     "vue-clickaway": "^2.2.2",
     "vue-router": "^3.2.0",

@@ -1,5 +1,5 @@
 <template>
-	<div class="createsubs lg:p-16">
+	<div class="createsubs p-3 lg:p-16">
 		<h4 class="text-xl lg:text-2xl xl:text-3xl font-bold">
 			Create Subscription
 		</h4>
@@ -75,7 +75,8 @@ export default {
 	},
 	methods: {
 		onSubmit() {
-
+			let subscription = Object.values(this.subs).find(value => !!value)
+			if (subscription) this.$emit('create', subscription)
 		}
 	}
 }
