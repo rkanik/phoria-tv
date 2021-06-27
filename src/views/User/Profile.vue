@@ -12,10 +12,10 @@
 				class="profile__content absolute inset-0 flex flex-col justify-end items-center"
 			>
 				<h2
-					class="text-xl md:text-5xl text-primary font-bold flex items-center mb-2"
+					class="profile__username text-primary font-bold flex items-center mb-2"
 				>
 					Phoria Username
-					<span class="material-icons text-xl ml-2 text-blue-300"
+					<span class="material-icons ml-2 text-blue-300"
 						>verified_user</span
 					>
 				</h2>
@@ -34,7 +34,7 @@
 			<Flex
 				items-center
 				justify-center
-				class="mt-20 2xl:mt-0 py-3 lg:justify-end flex-1 space-x-4 text-cyan-accent font-bold text-sm md:text-base lg:text-xl 2xl:text-3xl"
+				class="profile__stats mt-20 2xl:mt-0 py-3 lg:justify-end flex-1 space-x-4 text-cyan-accent font-bold"
 			>
 				<div class="bg-secondary2 py-2 px-4 2xl:py-3 2xl:px-8">Top 10%</div>
 				<div class="py-2 px-4 2xl:py-3 2xl:px-8">234 Posts</div>
@@ -98,7 +98,7 @@
 					class="text-left flex flex-col space-y-3 lg:space-y-6 mt-3 lg:mt-14"
 				>
 					<div
-						class="subscription w-full mx-auto text-base lg:text-2xl font-bold text-white bg-primary p-4 rounded"
+						class="subscription w-full mx-auto font-bold text-white bg-primary p-4 rounded"
 					>
 						Support Phoria Girl 9000
 					</div>
@@ -109,16 +109,16 @@
 							class="subscription w-full mx-auto text-white bg-secondary2 p-4 rounded flex justify-between cursor-pointer"
 							:class="{ active: sub.id === subscription.selected }"
 						>
-							<h3 class="text-base lg:text-2xl font-bold">
+							<h3 class="font-bold">
 								{{ sub.title }}
 							</h3>
-							<p class="text-base lg:text-2xl font-light">
+							<p class="font-light">
 								{{ sub.price }}
 							</p>
 						</div>
 					</template>
-					<div class="text-center pt-2 lg:pt-4">
-						<p class="text-white text-sm lg:text-xl font-light">
+					<div class="subscription mx-auto text-center pt-2 lg:pt-4">
+						<p class="text-white font-light">
 							Normal Subscription is $14.99 per month
 						</p>
 					</div>
@@ -200,6 +200,13 @@ export default {
 		&__content {
 			background: rgba(0, 0, 0, 0.25);
 		}
+		&__username {
+			font-size: 30px;
+		}
+		&__stats,
+		&__tab {
+			font-size: 23px;
+		}
 		&__tab {
 			> div {
 				color: var(--yellow-1);
@@ -219,6 +226,11 @@ export default {
 	}
 	.subscription {
 		max-width: 100%;
+		&,
+		h3,
+		p {
+			font-size: 23px;
+		}
 		@include on("md") {
 			max-width: 90%;
 		}

@@ -4,12 +4,11 @@
 			<Flex items-center class="sm:justify-between">
 				<router-link to="/" class="mr-auto sm:mr-0">
 					<img
-						v-if="isAuthPath"
 						alt="PhoriaTV Logo Black White"
 						class="w-8 h-8 lg:w-12 lg:h-12 2xl:w-16 2xl:h-16"
 						src="../assets/images/phoria-logo-white-256.png"
 					/>
-					<Flex
+					<!-- <Flex
 						v-else
 						class="bg-secondary2 rounded 2xl:rounded-xl overflow-hidden"
 					>
@@ -23,7 +22,7 @@
 						>
 							PhoriaTV
 						</div>
-					</Flex>
+					</Flex> -->
 				</router-link>
 				<Flex class="hidden sm:flex space-x-6 lg:space-x-8 2xl:space-x-10">
 					<template v-for="(nav, navIndex) in navs">

@@ -1,19 +1,19 @@
 <template>
 	<div>
-		<Flex>
+		<Flex on="sm">
 			<div
 				v-if="!ghost"
-				class="relative h-9 w-9 lg:h-11 lg:w-11 rounded-full flex-none overflow-hidden"
+				class="float-left sm:float-none mr-3 lg:mr-5 relative h-9 w-9 lg:h-11 lg:w-11 rounded-full flex-none overflow-hidden"
 			>
 				<img
 					:src="user.thumbnail"
 					class="w-full h-full object-cover object-center"
 				/>
 			</div>
-			<div class="ml-3 lg:ml-5">
+			<div>
 				<p class="text-base lg:text-lg">
-					<a v-if="!ghost" href="#" class="font-bold">{{
-						user.username
+					<a href="#" class="font-bold">{{
+						ghost ? "@Anonymous" : user.username
 					}}</a>
 					{{ comment }}
 				</p>

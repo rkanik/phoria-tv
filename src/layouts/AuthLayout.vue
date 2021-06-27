@@ -15,7 +15,7 @@
 							color="cyan"
 							class="rounded-r-none"
 							:outlined="$route.path !== '/signup'"
-							>Signup</TButton
+							>Sign Up</TButton
 						>
 						<TButton
 							size="sm"
@@ -23,7 +23,7 @@
 							color="cyan"
 							class="rounded-l-none border-l-0"
 							:outlined="$route.path !== '/login'"
-							>Login</TButton
+							>Log In</TButton
 						>
 					</div>
 				</Flex>
